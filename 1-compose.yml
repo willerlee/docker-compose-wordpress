@@ -1,0 +1,29 @@
+version: '3'
+
+services: 
+mysql: 
+    image: mysql:5.7
+    restart: always
+    volumes: 
+      - db-data:/var/lib/mysql/data
+    environment:
+      MYSQL_ROOT_PASSWORD: 1q2w3e4r
+      MYSQL_DATABASE: wordpress
+      MYSQL_USER: willerlee
+      MYSQL_PASSWORD: 1q2w3e4r
+
+wordpress:
+  depends_on: 
+    - mysql  
+    image: wordpress:latest
+    restart: always
+    ports:
+      - 8080:80
+    environment:
+      WORDPRESS_DB_HOST: mysql:3306
+      WORDPRESS_DB_USER: willerlee
+      WORDPRESS_DB_PASSWORD: 1q2w3e4r
+
+volumes:
+  db-data:  
+ 
